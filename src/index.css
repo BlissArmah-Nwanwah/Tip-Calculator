@@ -1,3 +1,5 @@
+ @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body{
   background: #C5E4E7;
 }
@@ -10,6 +12,16 @@ line-height: 24px;
 
 
 color: #5E7A7D;
+}
+
+h3{
+  font-family: 'Space Mono';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+color: #FFFFFF;
+margin-bottom: -5px;
 }
 main{
   display: flex;
@@ -30,6 +42,8 @@ main{
   max-width: 1024px;
   box-shadow: 0px 32px 43px rgba(79, 166, 175, 0.200735);
 border-radius: 25px;
+display: flex;
+align-items: center;
 
 }
 .bill-container{
@@ -81,15 +95,84 @@ button{
   width: 117px;
   height: 48px;
   border-radius: 5px;
-  /* margin-bottom: 16px;
-  margin-right: 14px; */
+  border: transparent; 
   font-style: normal;
 font-weight: 700;
 font-size: 24px;
 line-height: 36px;
-/* identical to box height */
 
 text-align: center;
 
+background: #00474B;
 color: #FFFFFF;
+cursor: pointer;
+}
+button:hover{
+  background: #26C2AE;
+  color: #00474B;
+}
+.default-btn{
+  background: #26C2AE;
+  color: #00474B;
+
+}
+.custom-btn{
+  color: #547878;
+}
+.people-available{
+  margin-top:40px;
+}
+.profile{
+  background-image: url(./assets/icon-person.svg);
+  background-repeat: no-repeat;
+  background-position: 16px;
+
+}
+
+.result-container{
+  width: 413px;
+  height: 417px;
+  background: #00474B;
+border-radius: 15px;
+}
+.results{
+margin: 0 40px;
+
+}
+
+.tip-amount,.total-amount{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tip-amount{
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+}
+
+.total-amount{
+  margin-bottom: 133px;
+}
+
+.figure{
+  font-family: 'Space Mono';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 71px;
+/* identical to box height */
+
+text-align: right;
+letter-spacing: -1px;
+
+color: #26C2AE;
+}
+
+.btn{
+  width: 333px;
+  background: #26C2AE;
+border-radius: 5px;
+cursor: pointer;
+
 }
