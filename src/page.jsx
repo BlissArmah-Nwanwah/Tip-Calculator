@@ -22,7 +22,7 @@ const page = () => {
               <button className="default-btn">15%</button>
               <button>25%</button>
               <button>50%</button>
-              <button className="custom-btn">Custom</button>
+              <input type="text" placeholder="Custom" className="select-input"/>
             </div>
           </div>
           <div className="people-available">
