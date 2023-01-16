@@ -4,9 +4,10 @@ import dollar from "./assets/icon-dollar.svg";
 import { useState } from "react";
 
 const page = () => {
-  const [bill,setBill] = useState(20)
+  const [bill,setBill] = useState(0)
   const [button,setButton] =useState(0)
   const [tip,setTip] =useState(0)
+  const [customTip,setCustomTip] = useState(0)
   const [people,setPeople] = useState(0)
   const [total,setTotal] = useState(0)
   
@@ -15,18 +16,25 @@ const page = () => {
     setTip((bill*button) / 100)
     
     console.log(total);
-    
-
   }
+  const customTipSelect = (e) =>{
+    e.preventDefault()
+    setCustomTip(e.target.value)
+    setTip((bill*customTip)/100)
+    console.log(tip);
+  }
+
   const totalAmount = (e)=>{
     setPeople(e.target.value)
-    setTotal(tip * people)
+    setTotal(bill + (tip * people) / people)
   }
+
   useEffect(()=>{
     setTip((bill*button) / 100)
     setTotal(tip * people)
+    setTip((bill*customTip)/100)
 
-  }, [button,people])
+  }, [button,people,customTip])
 
   return (
     <main>
@@ -47,12 +55,12 @@ const page = () => {
               <button className="default-btn" onClick={()=>handleButton('15')}>15%</button>
               <button onClick={()=>handleButton('25')}>25%</button>
               <button onClick={()=>handleButton('50')}>50%</button>
-              <input type="text" placeholder="Custom" className="select-input"/>
+              <input type="text" placeholder="Custom" className="select-input" value={customTip} onChange={customTipSelect} />
             </div>
           </div>
           <div className="people-available">
             <span>Number of people</span>
-            <input type="text" className="profile" value={people} onChange={(e)=> totalAmount(e)}  />
+            <input type="text" className="profile" value={people} onChange={totalAmount}  />
           </div>
         </div>
         <div className="result-container">
@@ -63,7 +71,7 @@ const page = () => {
               <span>/ person</span>
             </div>
             
-            <div className="figure">${tip}</div>
+            <div className="figure">${tip.toFixed(2)}</div>
           </div>
           <div className="total-amount">
             <div className="text">
@@ -71,7 +79,7 @@ const page = () => {
               <span>/ person</span>
             </div>
             
-            <div className="figure">${total}</div>
+            <div className="figure">${total.toFixed(2)}</div>
           </div>
           <button className="btn">RESET</button>
           </div>
