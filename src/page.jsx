@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import image from "./assets/logo.svg";
 import dollar from "./assets/icon-dollar.svg";
 import { useState } from "react";
@@ -7,13 +7,27 @@ const page = () => {
   const [bill,setBill] = useState(20)
   const [button,setButton] =useState(0)
   const [tip,setTip] =useState(0)
-  const handleButton =(value)=>{
-    setButton(value / 100)
-    setTip(bill*button)
-  }
+  const [people,setPeople] = useState(0)
+  const [total,setTotal] = useState(0)
   
-  console.log(tip);
- 
+  const handleButton =(value)=>{
+    setButton(value)
+    setTip((bill*button) / 100)
+    
+    console.log(total);
+    
+
+  }
+  const totalAmount = (e)=>{
+    setPeople(e.target.value)
+    setTotal(tip * people)
+  }
+  useEffect(()=>{
+    setTip((bill*button) / 100)
+    setTotal(tip * people)
+
+  }, [button,people])
+
   return (
     <main>
       <img src={image} alt="" className="logo" />
@@ -38,7 +52,7 @@ const page = () => {
           </div>
           <div className="people-available">
             <span>Number of people</span>
-            <input type="text" className="profile" />
+            <input type="text" className="profile" value={people} onChange={(e)=> totalAmount(e)}  />
           </div>
         </div>
         <div className="result-container">
@@ -57,7 +71,7 @@ const page = () => {
               <span>/ person</span>
             </div>
             
-            <div className="figure">$32.79</div>
+            <div className="figure">${total}</div>
           </div>
           <button className="btn">RESET</button>
           </div>
