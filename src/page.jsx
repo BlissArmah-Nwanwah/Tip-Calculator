@@ -4,39 +4,39 @@ import dollar from "./assets/icon-dollar.svg";
 import { useState } from "react";
 
 const page = () => {
+
   const [bill,setBill] = useState(0)
   const [button,setButton] =useState(0)
   const [tip,setTip] =useState(0)
   const [customTip,setCustomTip] = useState(0)
   const [people,setPeople] = useState(0)
   const [total,setTotal] = useState(0)
+  const [test, setTest] = useState(1)
   
-  const handleButton =(value)=>{
-    setButton(value)
-    setTip((bill*button) / 100)
+ 
+
+  const handleButton = (value) => {
     
-    console.log(total);
-  }
-  const customTipSelect = (e) =>{
-    e.preventDefault()
-    setCustomTip(e.target.value)
-    setTip((bill*customTip)/100)
-    console.log(tip);
-  }
+    let all = (parseInt(bill)*value)/100
+    let result = all / parseInt(people)
+    setButton(result)
 
-  const totalAmount = (e)=>{
-    setPeople(e.target.value)
-    setTotal(bill + (tip * people) / people)
+    let final = (parseInt(bill) / parseInt(people)) + tip
+    setTotal(final)
   }
 
-  useEffect(()=>{
-    setTip((bill*button) / 100)
-    setTotal(tip * people)
-    setTip((bill*customTip)/100)
 
-  }, [button,people,customTip])
+
+  useEffect(() => {
+    console.log("Test is " + button)
+  }, [button])
+  
+  
+  
+
 
   return (
+
     <main>
       <img src={image} alt="" className="logo" />
       <div className="container">
@@ -50,17 +50,17 @@ const page = () => {
           <div className="select-tip">
             <span>Select Tip %</span>
             <div className="tip-button">
-              <button onClick={()=>handleButton('5')}>5%</button>
-              <button onClick={()=>handleButton('10')}>10%</button>
-              <button className="default-btn" onClick={()=>handleButton('15')}>15%</button>
-              <button onClick={()=>handleButton('25')}>25%</button>
-              <button onClick={()=>handleButton('50')}>50%</button>
-              <input type="text" placeholder="Custom" className="select-input" value={customTip} onChange={customTipSelect} />
+              <button onClick={() => {handleButton(5)}}>5%</button>
+              <button onClick={()=>handleButton(10)}>10%</button>
+              <button className="default-btn" onClick={()=>handleButton(15)}>15%</button>
+              <button onClick={()=>handleButton(25)}>25%</button>
+              <button onClick={()=>handleButton(50)}>50%</button>
+              <input type="text" placeholder="Custom" className="select-input"    />
             </div>
           </div>
           <div className="people-available">
             <span>Number of people</span>
-            <input type="text" className="profile" value={people} onChange={totalAmount}  />
+            <input type="text" className="profile" value={people}  onChange={(e)=>setPeople(e.target.value)}  />
           </div>
         </div>
         <div className="result-container">
@@ -71,7 +71,7 @@ const page = () => {
               <span>/ person</span>
             </div>
             
-            <div className="figure">${tip.toFixed(2)}</div>
+            <div className="figure">${button.toFixed(2)}</div>
           </div>
           <div className="total-amount">
             <div className="text">
