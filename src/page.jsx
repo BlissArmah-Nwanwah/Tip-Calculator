@@ -21,15 +21,14 @@ const page = () => {
     let result = all / parseInt(people)
     setButton(result)
 
-    let final = (parseInt(bill) / parseInt(people)) + tip
-    setTotal(final)
+    setTotal(result+(bill/people))
   }
 
 
 
   useEffect(() => {
     console.log("Test is " + button)
-  }, [button])
+  }, [button,total])
   
   
   
