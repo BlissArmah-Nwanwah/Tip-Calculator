@@ -5,30 +5,59 @@ import { useState } from "react";
 
 const page = () => {
 
-  const [bill,setBill] = useState(0)
-  const [button,setButton] =useState(0)
+  const [bill,setBill] = useState('')
+  const [button,setButton] =useState('')
   const [tip,setTip] =useState(0)
-  const [customTip,setCustomTip] = useState(0)
-  const [people,setPeople] = useState(0)
+  const [customTip,setCustomTip] = useState()
+  const [people,setPeople] = useState('')
   const [total,setTotal] = useState(0)
-  const [test, setTest] = useState(1)
   
- 
 
   const handleButton = (value) => {
     
     let all = (parseInt(bill)*value)/100
     let result = all / parseInt(people)
-    setButton(result)
+    setTip(result)
 
     setTotal(result+(bill/people))
+    // console.log(total, tip);
+   
+  }
+
+  const handleChange = () => {
+    // setCustomTip(e.target.value)
+    let all = (parseInt(bill)*parseInt(customTip))/100
+    let result = all / parseInt(people)
+    setTip(result)
+
+    setTotal(result+(bill/people))
+    console.log(total, tip);
+  } 
+  
+ 
+  const handleReset = () =>{
+    setBill(0)
+    setPeople(0)
+    setTotal(0)
+    setButton(0)
+    setTip(0)
+    
   }
 
 
 
   useEffect(() => {
-    console.log("Test is " + button)
-  }, [button,total])
+    if(bill > 0 && people > 0) {
+      if(customTip > 0 ){
+        handleChange()
+      }
+      if (button > 0  ) {
+        handleButton(button)
+      }
+
+    }
+
+  }, [button,customTip])
   
   
   
@@ -54,7 +83,7 @@ const page = () => {
               <button className="default-btn" onClick={()=>handleButton(15)}>15%</button>
               <button onClick={()=>handleButton(25)}>25%</button>
               <button onClick={()=>handleButton(50)}>50%</button>
-              <input type="text" placeholder="Custom" className="select-input"    />
+              <input type="text"  className="select-input" onChange={(e)=> setCustomTip(e.target.value)}    />
             </div>
           </div>
           <div className="people-available">
@@ -70,7 +99,7 @@ const page = () => {
               <span>/ person</span>
             </div>
             
-            <div className="figure">${button.toFixed(2)}</div>
+            <div className="figure">${tip.toFixed(2)}</div>
           </div>
           <div className="total-amount">
             <div className="text">
@@ -80,7 +109,7 @@ const page = () => {
             
             <div className="figure">${total.toFixed(2)}</div>
           </div>
-          <button className="btn">RESET</button>
+          <button className="btn" onClick={handleReset}>RESET</button>
           </div>
           
           
